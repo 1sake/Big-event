@@ -1,0 +1,12 @@
+.layui-footer {
+    text-align: center;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+}
+
+a {
+    transition: none !important;
+}
