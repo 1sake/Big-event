@@ -36,13 +36,15 @@ $(function () {
         }
     });
     // 注册事件绑定ajax 请求
-    $('#zhuce').on('click', function (e) {
+    $('#zhuce').on('submit', function (e) {
+
         e.preventDefault()
         if (/^[\S]{6,12}$/.test($('#change').val())) {
             $.ajax({
                 type: 'POST',
-                url: 'http://ajax.frontend.itheima.net/api/reguser',
+                url: '/api/reguser',
                 data: {
+                    //  $(this).serialize() 获取到表单中的值
                     username: $('#uname2').val(),
                     password: $('#change').val()
                 },
@@ -51,25 +53,28 @@ $(function () {
                     if (res.status == 0) { // 请求成功
                         let layer = layui.layer
                         layer.msg(res.message);
-                        emp('#uname2', '#change')
+                        clean('#uname2', '#change')
+                        clean('#uname2', '#change')
+                        $('#repassword').val('')
                         $('#link_reg').click()
                     }
                     if (res.status == 1) { // 请求失败
                         let layer = layui.layer
                         layer.msg(res.message);
-                        emp('#uname2', '#change')
+                        clean('#uname2', '#change')
+                        $('#repassword').val('')
                     }
                 }
             })
         }
 
     })
-    $('#denglu').on('click', function (e) {
+    $('#denglu').on('submit', function (e) {
         e.preventDefault()
         if (/^[\S]{6,12}$/.test($('#upass1').val())) {
             $.ajax({
                 type: 'POST',
-                url: 'http://ajax.frontend.itheima.net/api/login',
+                url: '/api/login',
                 data: {
                     username: $('#uname1').val(),
                     password: $('#upass1').val()
@@ -77,21 +82,24 @@ $(function () {
                 success: function (res) {
                     console.log(res);
                     if (res.status == 0) {
+                        //  把登录成功的token保存后面访问地址需要
+                        localStorage.setItem('token', res.token)
                         let layer = layui.layer
                         layer.msg(res.message);
-                        emp('#uname1', '#upass1')
+                        clean('#uname1', '#upass1')
                         location.href = '/index.html'
+
                     } else {
                         let layer = layui.layer
                         layer.msg(res.message);
-                        emp('#uname1', '#upass1')
+                        clean('#uname1', '#upass1')
                     }
                 }
             })
         }
     })
     // 清空表单
-    function emp(a, b) {
+    function clean(a, b) {
         $(a).val('')
         $(b).val('')
     }
