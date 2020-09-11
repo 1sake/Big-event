@@ -1,0 +1,15 @@
+.layui-form input {
+    width: 400px !important;
+}
+
+.layui-card-header {
+    position: relative;
+    left: 30px;
+}
+
+.layui-card-header {
+    font-size: 16px;
+}
+body{
+    background-color: #eee;
+}
