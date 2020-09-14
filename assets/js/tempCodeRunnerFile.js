@@ -39,4 +39,3 @@ function readlyuser(user) {
         $('.head .pic').html(name[0].toUpperCase()).show()
     }
 }
-var num = null

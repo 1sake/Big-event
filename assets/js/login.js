@@ -1,5 +1,12 @@
 $(function () {
     // 登录/注册切换
+    if (localStorage.getItem('token')) {
+        localStorage.removeItem('token')
+    }
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
     $('.login_box').on('click', 'a', function () {
         $('.login_box').toggle()
         $('.reg_box').toggle()
